@@ -1,0 +1,12 @@
+build/
+.gradle/
+*.class
+*.jar
+*.zap
+*.log
+.idea/
+.vscode/
+*.iml
+.DS_Store
+local.properties
+
