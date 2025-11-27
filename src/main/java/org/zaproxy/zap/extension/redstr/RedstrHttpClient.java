@@ -183,27 +183,31 @@ public class RedstrHttpClient {
             return "";
         }
         
+        // Process backslash last to avoid incorrectly unescaping already-processed sequences
         return str.replace("\\\"", "\"")
-                .replace("\\\\", "\\")
                 .replace("\\n", "\n")
                 .replace("\\r", "\r")
                 .replace("\\t", "\t")
                 .replace("\\b", "\b")
-                .replace("\\f", "\f");
+                .replace("\\f", "\f")
+                .replace("\\\\", "\\");
     }
     
     /**
      * Tests the connection to the redstr server.
+     * Note: This attempts a basic transformation. If the server doesn't support
+     * the test function, it may return false even when the server is running.
      * 
-     * @return true if the server is reachable, false otherwise
+     * @return true if the server is reachable and responds successfully, false otherwise
      */
     public boolean testConnection() {
         try {
             // Try a simple transformation to test connectivity
-            transform("identity", "test");
+            // Using a basic function that should be supported by most configurations
+            transform("base64_encode", "test");
             return true;
         } catch (Exception e) {
-            LOGGER.warn("Connection test failed: {}", e.getMessage());
+            LOGGER.debug("Connection test failed: {}", e.getMessage());
             return false;
         }
     }
