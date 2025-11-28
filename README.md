@@ -159,15 +159,71 @@ cd redstr-owasp-zap
 ./gradlew build
 ```
 
-Output: `build/zapAddOn/redstr-owasp-zap-*.zap`
+Output: `build/zapAddOn/bin/redstr-alpha-1.0.0.zap`
 
 ### Loading Add-on
 
 1. Open OWASP ZAP
-2. Go to Manage Add-ons
-3. Click "Load Add-on File"
-4. Select the `.zap` file
-5. Restart ZAP if required
+2. Go to `Tools` → `Manage Add-ons`
+3. Click the `File` button (folder icon)
+4. Navigate to `build/zapAddOn/bin/`
+5. Select `redstr-alpha-1.0.0.zap`
+6. Click `Open`
+7. Restart ZAP if prompted
+
+## Testing
+
+For detailed testing instructions, see [TESTING.md](TESTING.md).
+
+### Quick Test
+
+1. **Build the add-on**:
+   ```bash
+   ./gradlew build
+   ```
+
+2. **Start redstr-server** (optional):
+   ```bash
+   git clone https://github.com/arvid-berndtsson/redstr-server.git
+   cd redstr-server
+   cargo run --release
+   ```
+
+3. **Install in ZAP**:
+   - Open ZAP
+   - Go to `Tools` → `Manage Add-ons`
+   - Click `File` and select `build/zapAddOn/bin/redstr-alpha-1.0.0.zap`
+
+4. **Verify installation**:
+   - Check the Output tab for "redstr extension initialized"
+   - If redstr-server is running, you should see "Successfully connected to redstr server"
+
+### Running Tests
+
+```bash
+# Run unit tests
+./gradlew test
+
+# View test report
+open build/reports/tests/test/index.html  # macOS
+xdg-open build/reports/tests/test/index.html  # Linux
+```
+
+### Current Status
+
+**What's Working** ✅
+- Add-on loads in ZAP 2.12.0+
+- Connects to redstr-server API
+- HTTP client with transformation support
+- Error handling and logging
+- All unit tests passing
+
+**What's Not Yet Implemented** 🚧
+- UI components (context menus, panels)
+- Fuzzer payload generation
+- Active scan integration
+- Script engine bindings
+- Configuration UI
 
 ## Configuration
 
