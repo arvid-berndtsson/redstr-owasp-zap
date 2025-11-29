@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zapaddon>
+    <name>redstr Integration</name>
+    <version>1.0.0</version>
+    <description>Integrates redstr's string transformation capabilities into OWASP ZAP for advanced security testing</description>
+    <author>Arvid Berndtsson</author>
+    <url>https://github.com/arvid-berndtsson/redstr-owasp-zap</url>
+    <changes>
+        <version>1.0.0</version>
+        <change>Initial release</change>
+        <change>HTTP client for redstr-server API</change>
+        <change>Basic extension framework</change>
+    </changes>
+    <dependencies>
+    </dependencies>
+    <extensions>
+        <extension>org.zaproxy.zap.extension.redstr.RedstrExtension</extension>
+    </extensions>
+</zapaddon>
